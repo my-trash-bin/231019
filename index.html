@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html style="margin: 0; padding: 0; border: none;">
+  <head>
+    <title>Modal scroll is not working on safari</title>
+  </head>
+  <body style="margin: 0; padding: 0; border: none;">
+    <div id="main-layer" style="overflow: hidden;">
+      <h1>Test page for reproduce bug</h1>
+      <p>[32] Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum[d] exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? [D]Quis autem vel eum i[r]ure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+      <p>[33] At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru[d]um facilis est e[r]t expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellend[a]us. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+    </div>
+    <div id="modal-layer" style="position: fixed; inset: 0; pointer-events: none;">
+      <div id="first-modal-scroll-container" style="position: absolute; width: 100vw; height: 100vh; overflow: auto;">
+        <div id="first-modal-background" style="background: #0008; min-height: 100%; padding: 0 24px; overflow: hidden; pointer-events: auto;">
+          <div id="first-modal-body" style="margin: 240px auto; max-width: 768px; background: #fff;">
+            <h1>This is modal, which is not scrollable only, and only in safari</h1>
+            <h2>Structure</h2>
+            <div>
+              It's structure is similar to below:
+              <ul>
+                <li>
+                  &lt;html&gt;
+                  <ul>
+                    <li>
+                      &lt;head&gt;
+                      <ul>
+                        <li>... anything</li>
+                      </ul>
+                    </li>
+                    <li>
+                      &lt;body&gt;
+                      <ul>
+                        <li>
+                          &lt;div&gt; - main layer
+                          <ul>
+                            <li>... main contents</li>
+                          </ul>
+                        </li>
+                        <li>
+                          &lt;div&gt; - modal layer (container of multiple modals)
+                          <ul>
+                            <li>
+                              &lt;div&gt; - modal scroll controller
+                              <ul>
+                                <li>
+                                  &lt;div&gt; - modal background
+                                  <ul>
+                                    <li>
+                                      &lt;div&gt; - modal body
+                                      <ul>
+                                        <li>... modal contents</li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <h2>Problem description</h2>
+            <p>Modal body, plus its inset, can be longer than modal background which has overflow: auto.</p>
+            <p>When inner contents overflow and outer container's overflow is auto, it should be scrollable.</p>
+            <p>Actually, it's scrollable in Chrome, Firefox, ... and many browsers, but NOT IN Safari!</p>
+            <h2>How to reproduce</h2>
+            <p>Open this HTML file using Chrome, Firefox, ... and Safari.</p>
+            <p>Resize window to make modal scrollable, and try to scroll.</p>
+            <p>It will not be scrollable in Safari, maybe, unless bug fixed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
