@@ -13,7 +13,7 @@
       <div id="first-modal-scroll-container" style="position: absolute; width: 100vw; height: 100vh; overflow: auto;">
         <div id="first-modal-background" style="background: #0008; min-height: 100%; padding: 0 24px; overflow: hidden; pointer-events: auto;">
           <div id="first-modal-body" style="margin: 240px auto; max-width: 768px; background: #fff;">
-            <h1>This is modal, which is not scrollable only, and only in safari</h1>
+            <h1>This is modal, which is not scrollable only in Safari</h1>
             <h2>Structure</h2>
             <div>
               It's structure is similar to below:
@@ -37,13 +37,13 @@
                           </ul>
                         </li>
                         <li>
-                          &lt;div&gt; - modal layer (container of multiple modals)
+                          &lt;div&gt; - modal layer (container of multiple modals) - pointer-events: none;
                           <ul>
                             <li>
-                              &lt;div&gt; - modal scroll controller
+                              &lt;div&gt; - modal scroll controller - overflow: auto;
                               <ul>
                                 <li>
-                                  &lt;div&gt; - modal background
+                                  &lt;div&gt; - modal background - pointer-events: auto;
                                   <ul>
                                     <li>
                                       &lt;div&gt; - modal body
@@ -71,6 +71,10 @@
             <p>Open this HTML file using Chrome, Firefox, ... and Safari.</p>
             <p>Resize window to make modal scrollable, and try to scroll.</p>
             <p>It will not be scrollable in Safari, maybe, unless bug fixed.</p>
+            <h2>Why?</h2>
+            <p>Safari seems to ignore scroll events when pointer-events is set to none.</p>
+            <h2>How to solve</h2>
+            <p>Set pointer-events to auto for the scroll container</p>
           </div>
         </div>
       </div>
